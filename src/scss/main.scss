@@ -1,4 +1,91 @@
 body {
-background: blue;
+  background-color: black;
+  width: 100%;
+  height: 100%;
 
+}
+
+* {
+  color: white;
+}
+
+h1 {
+  height: 20%;
+  width: 100%;
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
+  font-size:30px;
+  color:#ffffff;
+  text-shadow: 0 0 10px #ffffff,
+             0 0 20px  #ffffff,
+             0 0 30px  #ffffff,
+             0 0 40px  #228DFF,
+             0 0 70px  #228DFF,
+             0 0 80px  #228DFF,
+             0 0 100px #228DFF,
+             0 0 150px #228DFF,
+}
+
+.images {
+  width: 100%;
+  height: 100px;
+}
+
+.buttons{
+  display: inline;
+  height: 30px;
+  padding: 50px;
+  margin-left: 225px;
+  width: 200px;
+  color: white;
+  border: 1px solid white
+}
+
+main {
+  width: 100%;
+  margin: auto;
+  clear: both;
+}
+
+section {
+  width: 100%;
+  margin: 10px auto;
+}
+
+.buttonsection {
+  width: 100%;
+  height: 200px;
+  float:right;
+  display: inline;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+
+.playerdisplay {
+  border: 1px solid red;
+}
+
+.gameboard {
+    margin-left: 10%;
+    width: 80%;
+}
+
+
+
+.playable {
+  width: 13%;
+  height: 7vh;
+  border: 2px solid blue;
+  box-shadow: 2px 0px 10px #fff;
+  float: left;
+}
+
+.notplayable {
+  width: 13%;
+  height: 7vh;
+  border: 2px solid blue;
+  box-shadow: 2px 0px 10px #fff;
+  float: left;
 }
