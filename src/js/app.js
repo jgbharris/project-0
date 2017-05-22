@@ -10,9 +10,11 @@ $(() => {
   const $gameboard = $('.gameboard');
   const $cells = $('.cell');
   let turnCounter = null;
-
+  const $resetButton = $('#reset')
   // const mainaudio = new Audio('sounds/arcadefunk.mp3');
   // GAME SET UP BUTTON //
+
+responsiveVoice.speak('Hello welcome to funky laser connect 4');
 
   $startgame.on('click', (e) => {
     console.log('clicked');
@@ -20,7 +22,6 @@ $(() => {
     $audio.play();
     $askPlayerName1();
     $askPlayerName2();
-    responsiveVoice.speak('Hello welcome to connect 4');
   });
 
 
@@ -38,6 +39,7 @@ $(() => {
       $(e.target).addClass('notplayable');
       $cells.eq(index -7).removeClass('notplayable').addClass('playable');
       turnCounter++;
+      checkForWin();
     } else {
       if (turnCounter % 2 !== 0 && $(e.target).hasClass('playable')) {
         const index = $(e.target).index();
@@ -47,10 +49,44 @@ $(() => {
         $(e.target).addClass('notplayable');
         $cells.eq(index -7).removeClass('notplayable').addClass('playable');
         turnCounter++;
+        checkForWin();
       }
     }
 
-    console.log(turnCounter);
+    // RESET BUTTON //
+
+    $resetButton.on('click', (e) => {
+      $cells.html(' ');
+      $cells.css('background', 'transparent');
+    });
+
+
+
+
+    // console.log(turnCounter);
+
+    // WIN CONDITIONS //
+
+
+    function checkForWin() {
+      const currentIndex = $(e.target).index();
+
+
+      console.log('checkForWin');
+      let i = 4;
+      console.log(i);
+      console.log(currentIndex);
+
+      while (i--) {
+        console.log('This is i:', i);
+        if ($cells.eq(currentIndex +i).text() !=='X') {
+          break;
+        } else {
+          console.log('Horizontal Win');
+        }
+      }
+    }
+
 
 
 
