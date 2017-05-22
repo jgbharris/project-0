@@ -28,22 +28,27 @@ $(() => {
 
   $cells.on('click', (e) => {
     if (turnCounter % 2 === 0 && $(e.target).hasClass('playable')) {
-      console.log('logging e target is ', $(e.target));
+      console.log('logging e target is ', $(e.target).index());
+      const index = $(e.target).index();
       // $(e.target).index();
       $(e.target).html('X');
+      $(e.target).css('background-color', 'red');
       console.log($(e.target).html());
       $(e.target).removeClass('playable');
       $(e.target).addClass('notplayable');
+      $cells.eq(index -7).removeClass('notplayable').addClass('playable');
+      turnCounter++;
     } else {
-      if (turnCounter % 2 === !0 && $(e.target).hasClass('playable')) {
+      if (turnCounter % 2 !== 0 && $(e.target).hasClass('playable')) {
+        const index = $(e.target).index();
         $(e.target).html('O');
+        $(e.target).css('background-color', 'blue');
         $(e.target).removeClass('playable');
         $(e.target).addClass('notplayable');
+        $cells.eq(index -7).removeClass('notplayable').addClass('playable');
+        turnCounter++;
       }
     }
-
-
-    turnCounter++;
 
     console.log(turnCounter);
 
