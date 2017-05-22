@@ -7,14 +7,14 @@ $(() => {
   const $audio = $('audio')[0];
   // const $askPlayerName1 = prompt('Player 1 what is your name?');
   // const $askPlayerName2 = prompt('Player 2 what is your name?');
-  // const $gameboard = $('.gameboard');
+  const $gameboard = $('.gameboard');
   const $cells = $('.cell');
   let turnCounter = null;
   const $resetButton = $('#reset');
   // const mainaudio = new Audio('sounds/arcadefunk.mp3');
   // GAME SET UP BUTTON //
 
-  // responsiveVoice.speak('Hello welcome to funky laser connect 4');
+  responsiveVoice.speak(`Hello welcome to funky laser connect 4`);
 
   $startgame.on('click', (e) => {
     console.log('clicked');
@@ -59,30 +59,42 @@ $(() => {
     function checkForWin(index) {
       // VERTICAL WIN CHECK //
       console.log('index', index, $cells.eq(index+7));
+
       // const currentIndex = $(e.target).index();
-      console.log($cells.eq(index+7).html());
+      // console.log($cells.eq(index+7).html());
       if ($cells.eq(index).html() === $cells.eq(index+7).html() &&
       $cells.eq(index+7).html() === $cells.eq(index+14).html() &&
       $cells.eq(index+14).html() === $cells.eq(index+21).html()) {
+        console.log('vertical win');
         responsiveVoice.speak('vertical win');
-
       }
-    }
-      // checkForWin();
 
-      // console.log('checkForWin');
-      // let i = 4;
-      // console.log(i);
-      // console.log(currentIndex);
-      //
-      // while (i--) {
-      //   console.log('This is i:', i);
-      //   if ($cells.eq(currentIndex +i).text() !=='X') {
-      //     break;
-      //   } else {
-      //     console.log('Horizontal Win');
-      //   }
-      // }
+      if (
+      (Math.floor($cells.eq(index)) % 7) !== (Math.floor($cells.eq(index-3)) % 7) &&
+      $cells.eq(index).html() === $cells.eq(index-1).html() &&
+      $cells.eq(index-1).html() === $cells.eq(index-2).html() &&
+      $cells.eq(index-2).html() === $cells.eq(index-3).html()) {
+        console.log('horizontal win');
+        responsiveVoice.speak('horizontal win');
+      }
+
+      if ($cells.eq(index).html() === $cells.eq(index+6).html() &&
+      $cells.eq(index+6).html() === $cells.eq(index+12).html() &&
+      $cells.eq(index+12).html() === $cells.eq(index+18).html()
+      ||
+      $cells.eq(index).html() === $cells.eq(index+8).html() &&
+      $cells.eq(index+8).html() === $cells.eq(index+16).html() &&
+      $cells.eq(index+16).html() === $cells.eq(index+24).html())
+      {
+        console.log('diagonal win');
+        responsiveVoice.speak('diagonal win');
+      }
+
+
+
+
+    }
+
 
 
 
