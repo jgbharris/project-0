@@ -9,11 +9,12 @@ $(() => {
   const $audio2 = $('#audiowin')[0];
   const $askPlayerName1 = prompt('Player 1 what is your name?');
   const $askPlayerName2 = prompt('Player 2 what is your name?');
-  const $gameboard = $('.gameboard');
   const $cells = $('.cell');
   let turnCounter = null;
   const $resetButton = $('#reset');
   const $stopMusic = $('#stopmusic');
+  const $changeBackground = $('#changebackground');
+  const $body = $('body');
 
 
   // GAME SET UP BUTTON //
@@ -28,6 +29,8 @@ $(() => {
     $askPlayerName2();
   });
 
+  //STOP MUSIC BUTTON//
+
   $stopMusic.on('click', (e) => {
     console.log('stop music!');
     $audio.pause();
@@ -35,9 +38,19 @@ $(() => {
 
   });
 
+  //CHANGE BACKGROUND BUTTON//
+
+  $changeBackground.on('click', () => {
+    console.log('change background!');
+    $body.css('background-image', 'sunbackground.gif');
+  });
 
 
-  // CLICK ON SQUARE: PUTS X OR O IN SQUARE, ADDS 1 TO TURN COUNTER, MAKES SQUARE UNPLAYABLE (CAN'T PLACE ANOTHER PIECE ON SQUARE) AND MAKES SQUARE ABOVE PLAYABLE
+
+
+
+
+  // CLICK ON SQUARE: PUTS X OR O IN SQUARE, CHANGES COLOR,  ADDS 1 TO TURN COUNTER, MAKES SQUARE UNPLAYABLE (CAN'T PLACE ANOTHER PIECE ON SQUARE) AND MAKES SQUARE ABOVE PLAYABLE
 
 
   $cells.on('click', (e) => {
@@ -83,20 +96,42 @@ $(() => {
         $audio2.play();
       }
 
-      // HORIZONTAL WIN CHECK - CHECKS TO SEE WHETHER THE THE CELLS MATCH SEQUENTIALLY //
+      // HORIZONTAL WIN CHECK - CHECKS TO SEE WHETHER THE THE CELLS MATCH SEQUENTIALLY. THIS IS EITHER INFORNT OR BEHIND THE CELL YOU CLICKED. ACHIEVED BY SUBTRACTING OR ADDING THE 1,2 AND 3 TO THE INDEX OF THE CELL. ALSO NEED TO CHECK THAT THE CELLS ARE ON THE SAME ROW, THIS IS ACHIEVED USING MODULUS, IF THE REMAINDER OF THE CELL INDEX OVER THE WIDTH OF THE BOARD (7) IS THE SAME FOR BOTH THE FIRST AND THE LAST SQUARE, THEY ARE ON THE SAME ROW //
 
-      if (
-      (Math.floor($cells.eq(index)) % 7) === (Math.floor($cells.eq(index-3)) % 7) &&
-      $cells.eq(index).html() === $cells.eq(index-1).html() &&
-      $cells.eq(index-1).html() === $cells.eq(index-2).html() &&
-      $cells.eq(index-2).html() === $cells.eq(index-3).html() || $cells.eq(index).html() === $cells.eq(index+1).html() &&
-      $cells.eq(index+1).html() === $cells.eq(index+2).html() &&
-      $cells.eq(index+2).html() === $cells.eq(index+3).html()) {
-        console.log('horizontal win');
-        responsiveVoice.speak('horizontal win');
-        $audio2.src = 'sounds/win.wav';
-        $audio2.play();
+      console.log(Math.floor(index/7), Math.floor((index-3)/7), Math.floor((index+3)/7));
+
+      if (Math.floor(index/7) === Math.floor((index-3)/7) || Math.floor(index/7) === Math.floor((index+3)/7)){
+        console.log('checking horizontal win');
+        // find top of ROW
+        let topOfRow = Math.floor(index/7) * 7 + 6;
+        let streak  = 0;
+
+        while(topOfRow >= Math.floor(index/7) * 7 + 3) {
+          // check 4 from start of ROW
+          [0,-1,-2,-3].forEach((i) => {
+            console.log((turnCounter % 2 === 0 ? 'O' : 'X'));
+            if($cells.eq(topOfRow + i).html() === (turnCounter % 2 === 0 ? 'O' : 'X')) {
+              streak++;
+            }
+          });
+
+          if(streak === 4) {
+            console.log('horizontal win');
+            responsiveVoice.speak('horizontal win');
+            $audio2.src = 'sounds/win.wav';
+            $audio2.play();
+            $audio.pause();
+            break;
+          }
+
+          topOfRow--;
+          streak = 0;
+
+        }
+
       }
+
+      // DIAGONAL WIN CHECK- DIAGONAL SQUARES ARE ON THE WIDTH OF THE BOARD (7) PLUS OR MINUS ONE. AS YOU GO VERTICALLY UP THE BOARD WHILE PLAYING, THE INDEX OF THE SQUARE YOU CLICK ON WILL BE LOWER, THEREFORE WE NEED TO CHECK THE SQUARES FURTHER UP THE INDEX, HENCE THE CHECKS ARE POSITIVE IN EITHER MULTIPLES OF 6(7-1) OR 8(7+1).
 
       if ($cells.eq(index).html() === $cells.eq(index+6).html() &&
       $cells.eq(index+6).html() === $cells.eq(index+12).html() &&
@@ -104,25 +139,13 @@ $(() => {
       ||
       $cells.eq(index).html() === $cells.eq(index+8).html() &&
       $cells.eq(index+8).html() === $cells.eq(index+16).html() &&
-      $cells.eq(index+16).html() === $cells.eq(index+24).html()) { console.log('diagonal win');
+      $cells.eq(index+16).html() === $cells.eq(index+24).html()) {
+        console.log('diagonal win');
         responsiveVoice.speak('diagonal win');
         $audio.src = 'sounds/win.wav';
         $audio.play();
       }
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
   });
 
 
