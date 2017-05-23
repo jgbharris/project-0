@@ -9,15 +9,20 @@
   <link rel="stylesheet" href="public/css/main.css">
 </head>
   <h1>FUNKY LASER
-     <br>CONNECT 4</h1>
+     <br>CONNECT 4 - 80's CLASSIC VERSION</h1>
   <div class="buttonsection">
         <div id="startgame" class="buttons">start game</div>
-        <div class="playerdisplay buttons">Player Display<span></span></div>
+        <div class="playerdisplay buttons">player display<span></span></div>
+        <div id = "stopmusic" class="buttons">stop music</div>
+        <div id = "changebackground" class= "buttons"> change background</div>
         <div id="reset" class="buttons">reset</div>
-
   </div>
 <body>
-  <audio></audio>
+  <audio>
+    <audio id="audiobackground" src="sounds/arcadefunk.mp3"></audio>
+    <audio id="audioclick" src="sounds/boing1.wav"></audio>
+    <audio id="audiowin" src="sounds/win.wav"></audio>
+  </audio>
 
   <main>
 
