@@ -59,6 +59,11 @@ h1 {
   margin-top: 10px;
 }
 
+.buttons:hover{
+  background-color: #AEFF14;
+  cursor: url('spaceinvader.cur'), auto;
+}
+
 main {
   width: 100%;
   height: 50%;
@@ -123,4 +128,8 @@ main {
   box-shadow: 2px 0px 10px #fff;
   float: left;
   color: transparent;
+}
+
+.notplayable:hover{
+  cursor: not-allowed;
 }
