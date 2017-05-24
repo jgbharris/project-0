@@ -1,3 +1,18 @@
+* {
+box-sizing: border-box;
+
+}
+
+@font-face {
+    font-family: 'bpdotsregular';
+    src: url("bpdots-webfont.woff2") format("woff2"),
+         url("bpdots-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 body {
   background-color: black;
   background-image: url("lasertriangle.gif");
@@ -9,15 +24,12 @@ body {
 
 }
 
-* {
-  color: white;
-}
-
 h1 {
+  font-family: "bpdotsregular";
   height: 20%;
   width: 100%;
-  font-size: 20px;
   margin: auto;
+  padding: 50px;
   text-align: center;
   font-size:30px;
   color:#ffffff;
@@ -32,44 +44,60 @@ h1 {
 }
 
 .buttons{
-  display: inline;
-  height: 30px;
-  margin-left: 225px;
-  color: blue;
+  display: block;
+  font-size: 15px;
+  height: 30%;;
+  width: 175px;
+  color: #50BFE6;
   border: 1px solid white;
   text-align: center;
+  font-family: "bpdotsregular";
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #66FF66;
+  border-radius: 3px;
+  margin-top: 10px;
 }
 
 main {
   width: 100%;
+  height: 50%;
   margin: auto;
-  clear: both;
+  // clear: both;
 }
 
-section {
-  width: 100%;
-  margin: 10px auto;
+.game_setup {
+  width: 33%;
+  height: 30%;
+  padding-right: 100px;
+  float: left;
+  margin-left: auto;
 }
 
-.buttonsection {
-  width: 100%;
-  height: 50px;
-  float:right;
-  display: inline;
-  margin-top: 100px;
-  margin-bottom: 100px;
-  color: blue;
+.background_options {
+  height: 30%;
+  text-align: right;
+  float: right;
+  margin: auto;
+  margin-right: 20px;
 }
-
 
 .playerdisplay {
   border: 1px solid red;
-  color: blue;
+  color: white;
+  width: 33%;
+  height: 20%;
+  margin: 0 auto;
+  font-family: "bpdotsregular";
+  text-transform: uppercase;
+  text-align: center;
+  background-color: blue;
 }
 
 .gameboard {
     margin-left: 11%;
     width: 80%;
+    padding-top: 20%;
 }
 
 
@@ -80,10 +108,11 @@ section {
   border: 2px solid #00ff00;
   box-shadow: 2px 0px 10px #fff;
   float: left;
+  color: transparent;
 }
 
 .playable:hover{
-  background-color: #FFFF66;
+  background-color: #AEFF14;
   cursor: url('spaceinvader.cur'), auto;
 }
 
@@ -93,4 +122,5 @@ section {
   border: 2px solid #00ff00;
   box-shadow: 2px 0px 10px #fff;
   float: left;
+  color: transparent;
 }

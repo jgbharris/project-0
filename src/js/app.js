@@ -15,24 +15,34 @@ $(() => {
   const $stopMusic = $('#stopmusic');
   const $sunBackground = $('#sunbackground');
   const $tronBackground = $('#tronbackground');
+  const $triangleBackground = $('#trianglebackground');
   const $body = $('body');
   const $playerDisplay = $('.playerdisplay');
   const vWin = 'vertical win';
   const winSound = 'win';
-  const vWinBackground = 'taco';
+  const vWinBackground = 'taco.gif';
   const hWin = 'horizontal win';
-  const hWinBackground = 'mandance';
+  const hWinBackground = 'mandance.gif';
   const dWin = 'diagonal win';
-  const dWinBackground = 'celebration';
+  const dWinBackground = 'celebration.gif';
+  const sunBgFile = 'sunbackground.gif';
+  const tronBgFile = 'tronwallpaper.png';
+  const triangleBgFile = 'lasertriangle.gif';
+
 
   function victory (A,B,C) {
-    console.log('A');
+    console.log(`${A}`);
     responsiveVoice.speak(`${A}`);
     $audio2.src = `sounds/${B}.wav`;
     $audio2.play();
     $audio.pause();
-    $playerDisplay.html('A');
-    $body.css('background-image', `url(public/css/${C}.gif)`);
+    $playerDisplay.html(`${A}`);
+    $body.css('background-image', `url(public/css/${C})`);
+  }
+
+  function changeBackground (D) {
+    console.log('change background!');
+    $body.css('background-image', `url(public/css/${D})`);
   }
 
 
@@ -50,22 +60,24 @@ $(() => {
   $stopMusic.on('click', (e) => {
     console.log('stop music!');
     $audio.pause();
-
-
   });
 
   //SUN BACKGROUND BUTTON//
 
   $sunBackground.on('click', () => {
-    console.log('change background!');
-    $body.css('background-image', 'url(public/css/sunbackground.gif)');
+    changeBackground(sunBgFile);
   });
 
 //TRON BACKGROUND BUTTON//
 
   $tronBackground.on('click', () => {
-    console.log('change background!');
-    $body.css('background-image', 'url(public/css/tronwallpaper.png)');
+    changeBackground(tronBgFile);
+  });
+
+//TRIANGLE BACKGROUND BUTTON//
+
+  $triangleBackground.on('click', () => {
+    changeBackground(triangleBgFile);
   });
 
 
@@ -73,7 +85,7 @@ $(() => {
 
 
   $cells.on('click', (e) => {
-    const color = turnCounter % 2 === 0 ? '#50BFE6' : '#FF00CC';
+    const color = turnCounter % 2 === 0 ? '#00FFFF' : '#FF00CC';
     const counter = turnCounter % 2 === 0 ? 'X' : 'O';
     if ($(e.target).hasClass('playable')) {
       const index = $(e.target).index();
@@ -125,7 +137,7 @@ $(() => {
         victory(dWin,winSound,dWinBackground);
       }
 
-      // HORIZONTAL WIN CHECK - CHECKS TO SEE WHETHER THE THE CELLS MATCH SEQUENTIALLY. THIS IS EITHER INFORNT OR BEHIND THE CELL YOU CLICKED. ACHIEVED BY SUBTRACTING OR ADDING THE 1,2 AND 3 TO THE INDEX OF THE CELL. ALSO NEED TO CHECK THAT THE CELLS ARE ON THE SAME ROW, THIS IS ACHIEVED USING MODULUS, IF THE REMAINDER OF THE CELL INDEX OVER THE WIDTH OF THE BOARD (7) IS THE SAME FOR BOTH THE FIRST AND THE LAST SQUARE, THEY ARE ON THE SAME ROW //
+      // HORIZONTAL WIN CHECK - CHECKS TO SEE WHETHER CELLS ARE IN THE SAME ROW BY TAKING THE MATH.FLOOR OF THE INDEX NUMBER OVER THE WIDTH OF THE BOARD (7). FINDS TOP OF THE RELEVANT ROW BY ADDING 6 TO THE MATH.FLOOR OF THE CELL INDEX / 7. STARTS LOOP AT TOP OF ROW LOOKING FOR SEQUENTIAL MATCHES IN THE CELLS, IF IT FINDS ONE, THE STREAK COUNTER ADDS 1. HORIZONTAL WIN ANNOUNCES WHEN STREAK HITS 4.
 
       console.log(Math.floor(index/7), Math.floor((index-3)/7), Math.floor((index+3)/7));
 
