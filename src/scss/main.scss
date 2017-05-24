@@ -16,7 +16,7 @@ box-sizing: border-box;
 body {
   background-color: black;
   background-image: url("lasertriangle.gif");
-  background-repeat: no-repeat;
+  background-repeat:repeat-y;
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -87,8 +87,18 @@ main {
   margin-right: 20px;
 }
 
+// .connect4 {
+//   transition-timing-function: ease-in-out;
+//   transform: translateX(130%);
+//   transform: translateX(130%);
+//   color: white;
+//
+//   width: 100px;
+// }
+
 .playerdisplay {
-  border: 1px solid red;
+  border: 2px solid #00ff00;
+  box-shadow: 2px 0px 10px #fff;
   color: white;
   width: 33%;
   height: 20%;
@@ -97,6 +107,16 @@ main {
   text-transform: uppercase;
   text-align: center;
   background-color: blue;
+}
+
+#game_setup_button {
+  background-color: #32CD32;
+  color: #00008B;
+}
+
+#background_options_button {
+  background-color: #32CD32;
+  color: #00008B;
 }
 
 #startgame {

@@ -66,35 +66,45 @@ $(() => {
 
 
   // START GAME BUTTON //
-
   $startgame.on('click', (e) => {
     console.log('clicked');
     $audio.src = 'sounds/arcadefunk.mp3';
     $audio.play();
-    responsiveVoice.speak(`Hello ${askPlayerName1} and ${askPlayerName2}  and welcome to funky laser connect 4`);
+    responsiveVoice.speak(`Hello ${askPlayerName1} and ${askPlayerName2}, welcome to funky laser connect 4, I am the game master, begin!`);
   });
 
   //STOP MUSIC BUTTON//
-
   $stopMusic.on('click', (e) => {
     console.log('stop music!');
     $audio.pause();
   });
 
-  //SUN BACKGROUND BUTTON//
+  // RESET BUTTON - SETS ALL HTML IN CELLS TO NOTHING AND CHANGES ALL BACKGROUND TO TRANSPARENT //
+  $resetButton.on('click', (e) => {
+    $cells.html('');
+    $playerDisplay.html('win display');
+    $cells.css('background', 'transparent');
+    $cells.addClass('notplayable');
+    const indices = [35,36,37,38,39,40,41];
+    indices.forEach((index)=>{
+      $cells.eq(index).removeClass('notplayable').addClass('playable');
+    });
+    changeBackground(triangleBgFile);
 
+  });
+
+
+  //SUN BACKGROUND BUTTON//
   $sunBackground.on('click', () => {
     changeBackground(sunBgFile);
   });
 
 //TRON BACKGROUND BUTTON//
-
   $tronBackground.on('click', () => {
     changeBackground(tronBgFile);
   });
 
 //TRIANGLE BACKGROUND BUTTON//
-
   $triangleBackground.on('click', () => {
     changeBackground(triangleBgFile);
   });
@@ -119,12 +129,6 @@ $(() => {
       $audio1.play();
     }
 
-    // RESET BUTTON - SETS ALL HTML IN CELLS TO NOTHING AND CHANGES ALL BACKGROUND TO TRANSPARENT //
-
-    $resetButton.on('click', (e) => {
-      $cells.html(' ');
-      $cells.css('background', 'transparent');
-    });
 
 
     // WIN CONDITIONS //
@@ -189,46 +193,5 @@ $(() => {
 
     }
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 });
