@@ -17,11 +17,26 @@ $(() => {
   const $tronBackground = $('#tronbackground');
   const $body = $('body');
   const $playerDisplay = $('.playerdisplay');
+  const vWin = 'vertical win';
+  const winSound = 'win';
+  const vWinBackground = 'taco';
+  const hWin = 'horizontal win';
+  const hWinBackground = 'mandance';
+  const dWin = 'diagonal win';
+  const dWinBackground = 'celebration';
+
+  function victory (A,B,C) {
+    console.log('A');
+    responsiveVoice.speak(`${A}`);
+    $audio2.src = `sounds/${B}.wav`;
+    $audio2.play();
+    $audio.pause();
+    $playerDisplay.html('A');
+    $body.css('background-image', `url(public/css/${C}.gif)`);
+  }
 
 
   // GAME SET UP BUTTON //
-
-
 
   $startgame.on('click', (e) => {
     console.log('clicked');
@@ -94,14 +109,7 @@ $(() => {
       if ($cells.eq(index).html() === $cells.eq(index+7).html() &&
       $cells.eq(index+7).html() === $cells.eq(index+14).html() &&
       $cells.eq(index+14).html() === $cells.eq(index+21).html()) {
-        console.log('vertical win');
-        responsiveVoice.speak('vertical win');
-        $audio.src = 'sounds/win.wav';
-        $audio2.play();
-        $playerDisplay.html('vertical win');
-        $body.css('background-image', 'url(public/css/taco.gif)');
-
-
+        victory(vWin,winSound,vWinBackground);
       }
 
 
@@ -114,12 +122,7 @@ $(() => {
       $cells.eq(index).html() === $cells.eq(index+8).html() &&
       $cells.eq(index+8).html() === $cells.eq(index+16).html() &&
       $cells.eq(index+16).html() === $cells.eq(index+24).html()) {
-        console.log('diagonal win');
-        responsiveVoice.speak('diagonal win');
-        $audio.src = 'sounds/win.wav';
-        $audio.play();
-        $playerDisplay.html('diagonal win');
-        $body.css('background-image', 'url(public/css/celebration.gif)');
+        victory(dWin,winSound,dWinBackground);
       }
 
       // HORIZONTAL WIN CHECK - CHECKS TO SEE WHETHER THE THE CELLS MATCH SEQUENTIALLY. THIS IS EITHER INFORNT OR BEHIND THE CELL YOU CLICKED. ACHIEVED BY SUBTRACTING OR ADDING THE 1,2 AND 3 TO THE INDEX OF THE CELL. ALSO NEED TO CHECK THAT THE CELLS ARE ON THE SAME ROW, THIS IS ACHIEVED USING MODULUS, IF THE REMAINDER OF THE CELL INDEX OVER THE WIDTH OF THE BOARD (7) IS THE SAME FOR BOTH THE FIRST AND THE LAST SQUARE, THEY ARE ON THE SAME ROW //
@@ -142,13 +145,7 @@ $(() => {
           });
 
           if(streak === 4) {
-            console.log('horizontal win');
-            responsiveVoice.speak('horizontal win');
-            $audio2.src = 'sounds/win.wav';
-            $audio2.play();
-            $audio.pause();
-            $playerDisplay.html('horizontal win');
-            $body.css('background-image', 'url(public/css/mandance.gif)');
+            victory(hWin,winSound,hWinBackground);
             break;
           }
 
