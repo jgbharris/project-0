@@ -28,6 +28,8 @@ $(() => {
   const sunBgFile = 'sunbackground.gif';
   const tronBgFile = 'tronwallpaper.png';
   const triangleBgFile = 'lasertriangle.gif';
+  const $gameSetupButton = $('#game_setup_button');
+  const $backgroundOptionsButton = $('#background_options_button');
 
 
   function victory (A,B,C) {
@@ -45,8 +47,25 @@ $(() => {
     $body.css('background-image', `url(public/css/${D})`);
   }
 
+  // GAME SETUP DROPDOWN //
+  $gameSetupButton.on('click', (e) => {
+    $startgame.slideDown(200);
+    $stopMusic.slideDown(200);
+    $resetButton.slideDown(200);
 
-  // GAME SET UP BUTTON //
+  });
+
+  // BACKGROUND OPTIONS DROPDOWN //
+  $backgroundOptionsButton.on('click', (e) => {
+    $sunBackground.slideDown(200);
+    $tronBackground.slideDown(200);
+    $triangleBackground.slideDown(200);
+
+  });
+
+
+
+  // START GAME BUTTON //
 
   $startgame.on('click', (e) => {
     console.log('clicked');
