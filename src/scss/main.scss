@@ -35,7 +35,7 @@ h1 {
   display: inline;
   height: 30px;
   margin-left: 225px;
-  color: white;
+  color: blue;
   border: 1px solid white;
   text-align: center;
 }
@@ -58,15 +58,17 @@ section {
   display: inline;
   margin-top: 100px;
   margin-bottom: 100px;
+  color: blue;
 }
 
 
 .playerdisplay {
   border: 1px solid red;
+  color: blue;
 }
 
 .gameboard {
-    margin-left: 10%;
+    margin-left: 11%;
     width: 80%;
 }
 
@@ -91,13 +93,4 @@ section {
   border: 2px solid #00ff00;
   box-shadow: 2px 0px 10px #fff;
   float: left;
-}
-
-.celebration {
-  width: 100px;
-  height: 10%;
-  background-image: url();
-  clear: both;
-  margin: 45%;
-
 }

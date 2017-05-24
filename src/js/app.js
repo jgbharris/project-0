@@ -7,8 +7,8 @@ $(() => {
   const $audio = $('#audiobackground')[0];
   const $audio1 = $('#audioclick')[0];
   const $audio2 = $('#audiowin')[0];
-  const askPlayerName1 = prompt('Player 1 what is your name?');
-  const askPlayerName2 = prompt('Player 2 what is your name?');
+  const askPlayerName1 = prompt('Player 1 please enter your name?');
+  const askPlayerName2 = prompt('Player 2 please enter your name?');
   const $cells = $('.cell');
   let turnCounter = null;
   const $resetButton = $('#reset');
@@ -17,7 +17,6 @@ $(() => {
   const $tronBackground = $('#tronbackground');
   const $body = $('body');
   const $playerDisplay = $('.playerdisplay');
-  const $celebration = $('.celebration')
 
 
   // GAME SET UP BUTTON //
