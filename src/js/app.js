@@ -7,26 +7,28 @@ $(() => {
   const $audio = $('#audiobackground')[0];
   const $audio1 = $('#audioclick')[0];
   const $audio2 = $('#audiowin')[0];
-  const $askPlayerName1 = prompt('Player 1 what is your name?');
-  const $askPlayerName2 = prompt('Player 2 what is your name?');
+  const askPlayerName1 = prompt('Player 1 what is your name?');
+  const askPlayerName2 = prompt('Player 2 what is your name?');
   const $cells = $('.cell');
   let turnCounter = null;
   const $resetButton = $('#reset');
   const $stopMusic = $('#stopmusic');
-  const $changeBackground = $('#changebackground');
+  const $sunBackground = $('#sunbackground');
+  const $tronBackground = $('#tronbackground');
   const $body = $('body');
+  const $playerDisplay = $('.playerdisplay');
+  const $celebration = $('.celebration')
 
 
   // GAME SET UP BUTTON //
 
-  responsiveVoice.speak(`Hello and welcome to funky laser connect 4`);
+
 
   $startgame.on('click', (e) => {
     console.log('clicked');
     $audio.src = 'sounds/arcadefunk.mp3';
     $audio.play();
-    $askPlayerName1();
-    $askPlayerName2();
+    responsiveVoice.speak(`Hello ${askPlayerName1} and ${askPlayerName2}  and welcome to funky laser connect 4`);
   });
 
   //STOP MUSIC BUTTON//
@@ -38,16 +40,19 @@ $(() => {
 
   });
 
-  //CHANGE BACKGROUND BUTTON//
+  //SUN BACKGROUND BUTTON//
 
-  $changeBackground.on('click', () => {
+  $sunBackground.on('click', () => {
     console.log('change background!');
-    $body.css('background-image', 'sunbackground.gif');
+    $body.css('background-image', 'url(public/css/sunbackground.gif)');
   });
 
+//TRON BACKGROUND BUTTON//
 
-
-
+  $tronBackground.on('click', () => {
+    console.log('change background!');
+    $body.css('background-image', 'url(public/css/tronwallpaper.png)');
+  });
 
 
   // CLICK ON SQUARE: PUTS X OR O IN SQUARE, CHANGES COLOR,  ADDS 1 TO TURN COUNTER, MAKES SQUARE UNPLAYABLE (CAN'T PLACE ANOTHER PIECE ON SQUARE) AND MAKES SQUARE ABOVE PLAYABLE
@@ -94,6 +99,28 @@ $(() => {
         responsiveVoice.speak('vertical win');
         $audio.src = 'sounds/win.wav';
         $audio2.play();
+        $playerDisplay.html('vertical win');
+        $body.css('background-image', 'url(public/css/taco.gif)');
+
+
+      }
+
+
+      // DIAGONAL WIN CHECK- DIAGONAL SQUARES ARE ON THE WIDTH OF THE BOARD (7) PLUS OR MINUS ONE. AS YOU GO VERTICALLY UP THE BOARD WHILE PLAYING, THE INDEX OF THE SQUARE YOU CLICK ON WILL BE LOWER, THEREFORE WE NEED TO CHECK THE SQUARES FURTHER UP THE INDEX, HENCE THE CHECKS ARE POSITIVE IN EITHER MULTIPLES OF 6(7-1) OR 8(7+1).
+
+      if ($cells.eq(index).html() === $cells.eq(index+6).html() &&
+      $cells.eq(index+6).html() === $cells.eq(index+12).html() &&
+      $cells.eq(index+12).html() === $cells.eq(index+18).html()
+      ||
+      $cells.eq(index).html() === $cells.eq(index+8).html() &&
+      $cells.eq(index+8).html() === $cells.eq(index+16).html() &&
+      $cells.eq(index+16).html() === $cells.eq(index+24).html()) {
+        console.log('diagonal win');
+        responsiveVoice.speak('diagonal win');
+        $audio.src = 'sounds/win.wav';
+        $audio.play();
+        $playerDisplay.html('diagonal win');
+        $body.css('background-image', 'url(public/css/celebration.gif)');
       }
 
       // HORIZONTAL WIN CHECK - CHECKS TO SEE WHETHER THE THE CELLS MATCH SEQUENTIALLY. THIS IS EITHER INFORNT OR BEHIND THE CELL YOU CLICKED. ACHIEVED BY SUBTRACTING OR ADDING THE 1,2 AND 3 TO THE INDEX OF THE CELL. ALSO NEED TO CHECK THAT THE CELLS ARE ON THE SAME ROW, THIS IS ACHIEVED USING MODULUS, IF THE REMAINDER OF THE CELL INDEX OVER THE WIDTH OF THE BOARD (7) IS THE SAME FOR BOTH THE FIRST AND THE LAST SQUARE, THEY ARE ON THE SAME ROW //
@@ -121,6 +148,8 @@ $(() => {
             $audio2.src = 'sounds/win.wav';
             $audio2.play();
             $audio.pause();
+            $playerDisplay.html('horizontal win');
+            $body.css('background-image', 'url(public/css/mandance.gif)');
             break;
           }
 
@@ -131,20 +160,6 @@ $(() => {
 
       }
 
-      // DIAGONAL WIN CHECK- DIAGONAL SQUARES ARE ON THE WIDTH OF THE BOARD (7) PLUS OR MINUS ONE. AS YOU GO VERTICALLY UP THE BOARD WHILE PLAYING, THE INDEX OF THE SQUARE YOU CLICK ON WILL BE LOWER, THEREFORE WE NEED TO CHECK THE SQUARES FURTHER UP THE INDEX, HENCE THE CHECKS ARE POSITIVE IN EITHER MULTIPLES OF 6(7-1) OR 8(7+1).
-
-      if ($cells.eq(index).html() === $cells.eq(index+6).html() &&
-      $cells.eq(index+6).html() === $cells.eq(index+12).html() &&
-      $cells.eq(index+12).html() === $cells.eq(index+18).html()
-      ||
-      $cells.eq(index).html() === $cells.eq(index+8).html() &&
-      $cells.eq(index+8).html() === $cells.eq(index+16).html() &&
-      $cells.eq(index+16).html() === $cells.eq(index+24).html()) {
-        console.log('diagonal win');
-        responsiveVoice.speak('diagonal win');
-        $audio.src = 'sounds/win.wav';
-        $audio.play();
-      }
     }
   });
 
