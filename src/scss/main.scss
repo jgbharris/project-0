@@ -164,6 +164,7 @@ main {
   color: transparent;
 }
 
+
 .playable:hover{
   background-color: #AEFF14;
   cursor: url('spaceinvader.cur'), auto;
@@ -181,3 +182,10 @@ main {
 .notplayable:hover{
   cursor: not-allowed;
 }
+ .blue {
+   background-color: #00FFFF;
+ }
+
+ .pink {
+   background-color: #FF00CC;
+ }
