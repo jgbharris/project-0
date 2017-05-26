@@ -8,7 +8,7 @@
 
 ## Description
 
-Two player game - aim is to achieve four in a row on a board of 7 x 6. The game was designed to have a 1980's arcade game look and feel.
+Two player game - aim is to achieve four in a row on a board of 7 x 6. The game was designed to have a 1980's arcade game look and feel. I used fonts from font squirrel to create the pixelated text.
 
 ![Imgur](http://i.imgur.com/vctMCEq.jpg)
 ![Imgur](http://i.imgur.com/2Btrt1K.png)
@@ -31,3 +31,4 @@ The logic to create the win conditions for a horizontal win were more complicate
 ## Potential additional features
 
 * Ability to play against the computer
+* Make the game scalable
